@@ -12,3 +12,7 @@ install: travis_retry composer install --no-interaction --prefer-source
 
 # 主要构建命令
 script: vendor/bin/phpunit --verbose
+
+# 通知
+notifications:
+  slack: lhp9916:2V7t1BWMF1yocafCX1aSCZks
