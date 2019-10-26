@@ -18,4 +18,4 @@ script:
 
 # 通知
 notifications:
-  slack: lhp9916:2V7t1BWMF1yocafCX1aSCZks
+  slack: ${Slack_token}
