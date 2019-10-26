@@ -1,21 +1,14 @@
-language: php  # 我们代码所需要运行的环境平台
-
-php:  # 需要测试的版本
+language: php
+php:
 - 7.2
 - 7.3
-
-dist: trusty   # 系统版本
-sudo: false  # 使用使用 sudo 模式
-
-# 执行前需要运行的命令
+dist: trusty
+sudo: false
 install: travis_retry composer install --no-interaction --prefer-source
-
-# 主要构建命令
 script:
-  - touch database/database.sqlite
-  - php artisan migrate --force --env=testing
-  - vendor/bin/phpunit --verbose
-
-# 通知
+- touch database/database.sqlite
+- php artisan migrate --force --env=testing
+- vendor/bin/phpunit --verbose
 notifications:
-  slack: ${Slack_token}
+  slack:
+    secure: dqUsT7ilJAfi5mx5O/I4ror893QxU0bd8BYSFTiG63UI+vmMMKwaCdDNdGbANPAWWSjpM/jTP1zAgnKkp0Tzs1/OrmOTFZQPlnp7pPkhwlF3vQ7fwCALQHQjkzIUXkeqddbK3+09cpG/CSrl3GpjpU/UZ1PHu9LAhzV7UQgX0kSm3oLt7+hgB+ZnPohggDmJG57nUpaunSBHSp0N6oy6jxJB4NrRclM5kjaGGO6sF1Cm+eebrmkfhAueDMbbzcJp6hg0NW7Sxf3DJLIVgqtaRHJ02uqjcXI1m+exmjWF9nU8H9EojnqAyCeZCQLn8BaaRz8XeEX7uUTPDmU4terOHfMPvzc1S9POsVIe1dIBx6/vhcDF2/JGNjHuNdBA5s6N235+FG5aEc0uJXbcKl10NO5pDexrbwYwmWU4jqFBfbRJVH4Oi6HoErBO+fClti1Y8EiJFZQANBju6kGcpewo3GvG1O6somL5j1LghANUsUxDtsDyanVXiH4ijWQNTNUjXv32/vl+AsmdnLTAQEncvPgH6mybJ7wj727vIVi24FaBG1EbTPVQgWZm2v+tlZ4vQc1rb2uxgLaXxVCTVtbvhhQu354x2/KIhBZIcitVDDEWRXoQM+GpLyUjlyybRscgt4vGE8ELday/51jvdAJs/2dWSgqAkijDuxHddkoTOkw=
