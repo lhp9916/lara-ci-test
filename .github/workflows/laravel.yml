@@ -26,6 +26,8 @@ jobs:
         mysql root password: 'root' # Required if "mysql user" is empty, default is empty. The root superuser password
         mysql user: 'homestead' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
         mysql password: 'secret'
+    - name:  Docker status
+      run:  sudo docker ps
     - name:  Migrate
       run:  php artisan migrate -v --force
     - name: Execute tests (Unit and Feature tests) via PHPUnit
