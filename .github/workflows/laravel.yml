@@ -13,12 +13,14 @@ jobs:
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
     - name: Generate key
       run: php artisan key:generate
-    - name: Create Database
-      run: |
-        mkdir -p database
-        touch database/database.sqlite
+    - uses: mirromutth/mysql-action@v1.1
+      with:
+        character set server: 'utf8' # Optional, default value is 'utf8mb4'. The '--character-set-server' option for mysqld
+        collation server: 'utf8_general_ci' # Optional, default value is 'utf8mb4_general_ci'. The '--collation-server' option for mysqld
+        mysql version: '5.7' # Optional, default value is "latest". The version of the MySQL
+        mysql database: 'laravel' # Optional, default value is "test". The specified database which will be create
+        mysql root password: '' # Required if "mysql user" is empty, default is empty. The root superuser password
+    - name:  migrate
+      run:  php artisan migrate --force
     - name: Execute tests (Unit and Feature tests) via PHPUnit
-      env:
-        DB_CONNECTION: sqlite
-        DB_DATABASE: database/database.sqlite
       run: vendor/bin/phpunit
