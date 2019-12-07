@@ -6,13 +6,6 @@ jobs:
   laravel-tests:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - name: Copy .env
-      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
-    - name: Install Dependencies
-      run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
-    - name: Generate key
-      run: php artisan key:generate
     - name: Shutdown Ubuntu MySQL (SUDO)
       run: sudo service mysql stop
     - uses: mirromutth/mysql-action@v1.1
@@ -28,6 +21,13 @@ jobs:
         mysql password: 'secret'
     - name:  Docker status
       run:  sudo docker ps
+    - uses: actions/checkout@v1
+    - name: Copy .env
+      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+    - name: Install Dependencies
+      run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+    - name: Generate key
+      run: php artisan key:generate
     - name:  Migrate
       run:  php artisan migrate -v --force
     - name: Execute tests (Unit and Feature tests) via PHPUnit
