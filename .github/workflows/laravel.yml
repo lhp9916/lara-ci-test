@@ -21,6 +21,14 @@ jobs:
         # mysql password: 'secret'
     - name:  Docker status
       run:  sudo docker ps
+    - name:  php version
+      run:  php -v
+    - name:  composer version
+      run:  composer -v
+    - name:  node version
+      run:  node -v
+    - name:  mysql version
+      run:  mysql -V
     - uses: actions/checkout@v1
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
