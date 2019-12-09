@@ -37,7 +37,7 @@ jobs:
     - name: Generate key
       run: php artisan key:generate
     - name: Create database
-      run: mysqladmin create laravel -u root
+      run: mysqladmin create laravel -u root -p root
     - name:  Migrate
       run:  php artisan migrate -v --force
     - name: Execute tests (Unit and Feature tests) via PHPUnit
